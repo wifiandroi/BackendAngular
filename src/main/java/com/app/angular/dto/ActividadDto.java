@@ -1,6 +1,5 @@
 package com.app.angular.dto;
 
-import javax.validation.constraints.NotNull;
 
 public class ActividadDto {
 
@@ -26,7 +25,7 @@ public class ActividadDto {
 		this.apellido = apellido;
 	}
 
-	public boolean isPrecio() {
+	public boolean getPrecio() {
 		return precio;
 	}
 

@@ -54,7 +54,7 @@ public class Actividad {
 		this.apellido = apellido;
 	}
 
-	public boolean isPrecio() {
+	public boolean getPrecio() {
 		return precio;
 	}
 
@@ -62,7 +62,11 @@ public class Actividad {
 		this.precio = precio;
 	}
 
-	public Actividad(@NotNull String nombre, @NotNull String apellido, @NotNull boolean precio) {
+
+	
+
+	public Actividad(int id, @NotNull String nombre, @NotNull String apellido, @NotNull boolean precio) {
+		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.precio = precio;
