@@ -7,7 +7,7 @@ public class ActividadDto {
 
 	private String apellido;
 
-	private boolean precio;
+	private float precio;
 
 	public String getNombre() {
 		return nombre;
@@ -25,15 +25,15 @@ public class ActividadDto {
 		this.apellido = apellido;
 	}
 
-	public boolean getPrecio() {
+	public float getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(boolean precio) {
+	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
 	
-	public ActividadDto(String nombre, String apellido, boolean precio) {
+	public ActividadDto(String nombre, String apellido, float precio) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.precio = precio;

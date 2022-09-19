@@ -28,7 +28,7 @@ public class Actividad {
 
 	@NotNull
 	@Column(name = "precios")
-	private boolean precio;
+	private Float precio;
 
 	public int getId() {
 		return id;
@@ -54,18 +54,18 @@ public class Actividad {
 		this.apellido = apellido;
 	}
 
-	public boolean getPrecio() {
+	public float getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(boolean precio) {
+	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
 
 
 	
 
-	public Actividad(int id, @NotNull String nombre, @NotNull String apellido, @NotNull boolean precio) {
+	public Actividad(int id, @NotNull String nombre, @NotNull String apellido, @NotNull float precio) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
