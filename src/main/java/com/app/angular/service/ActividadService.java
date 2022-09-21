@@ -25,12 +25,15 @@ public class ActividadService {
 	//Metodo buscar por ID
 //	public Actividad getOne(int id) {
 //	return actividadRepository.findById(id).get();	
-		public Actividad getOne(int id) throws ResourceNotFoundException {
-		return actividadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("not found"));
+	public Actividad getOne(int id) throws ResourceNotFoundException {
+		return actividadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No exite el ID"));
 	}
 
 	//Metodo Guardar
 	public Actividad save(ActividadDto dto) {
+//		if (actividadRepository.existsByName(dto.getNombre())) 
+//			throw new AttributeException("el nombre ya exite");
+		 		
 		int id = autoIncrement();
 		Actividad actividad = new Actividad(id, dto.getNombre(), dto.getApellido(), dto.getPrecio());
 		return actividadRepository.save(actividad);
@@ -47,7 +50,11 @@ public class ActividadService {
 //	public Actividad update(int id, ActividadDto dto) {
 //	Actividad actividad = actividadRepository.findById(id).get();	
    public Actividad update(int id, ActividadDto dto) throws ResourceNotFoundException {		
-		Actividad actividad = actividadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("not found"));
+		Actividad actividad = actividadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Sin actualizar"));
+		
+//		if(actividadRepository.existsByName(dto.getNombre()) && actividadRepository.findByName(dto.getNombre()).get().getId() != id)
+//			throw new AttributeException("el nombre ya exite");
+		
 		actividad.setNombre(dto.getNombre());
 		actividad.setApellido(dto.getApellido());
 		actividad.setPrecio(dto.getPrecio());
@@ -58,7 +65,7 @@ public class ActividadService {
 //	public Actividad delete(int id) {
 //	Actividad actividad = actividadRepository.findById(id).get();  
 		public Actividad delete(int id) throws ResourceNotFoundException {		
-		Actividad actividad = actividadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("not found"));
+		Actividad actividad = actividadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Sin Borrar"));
 		actividadRepository.delete(actividad);
 		return actividad;
 	}
