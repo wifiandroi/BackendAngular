@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.angular.dto.ActividadDto;
 import com.app.angular.entity.Actividad;
+import com.app.angular.global.exceptions.ResourceNotFoundException;
 import com.app.angular.service.ActividadService;
 
 @RestController
@@ -31,7 +32,8 @@ public class ActividadController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Actividad> getOne(@PathVariable("id") int id){
+//	public ResponseEntity<Actividad> getOne(@PathVariable("id") int id){
+	public ResponseEntity<Actividad> getOne(@PathVariable("id") int id) throws ResourceNotFoundException{		
 		return ResponseEntity.ok(actividadService.getOne(id));
 	}
 	
@@ -41,12 +43,14 @@ public class ActividadController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Actividad> update(@PathVariable("id") int id, @RequestBody ActividadDto dto){
+//	public ResponseEntity<Actividad> update(@PathVariable("id") int id, @RequestBody ActividadDto dto){
+	public ResponseEntity<Actividad> update(@PathVariable("id") int id, @RequestBody ActividadDto dto) throws ResourceNotFoundException{		
 		return ResponseEntity.ok(actividadService.update(id, dto));
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Actividad> delete(@PathVariable("id") int id){
+//	public ResponseEntity<Actividad> delete(@PathVariable("id") int id){
+	public ResponseEntity<Actividad> delete(@PathVariable("id") int id) throws ResourceNotFoundException{		
 		return ResponseEntity.ok(actividadService.delete(id));
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.angular.dto.ActividadDto;
 import com.app.angular.entity.Actividad;
+import com.app.angular.global.exceptions.ResourceNotFoundException;
 import com.app.angular.repository.ActividadRepository;
 
 @Service
@@ -22,8 +23,10 @@ public class ActividadService {
 	}
 
 	//Metodo buscar por ID
-	public Actividad getOne(int id) {
-		return actividadRepository.findById(id).get();
+//	public Actividad getOne(int id) {
+//	return actividadRepository.findById(id).get();	
+		public Actividad getOne(int id) throws ResourceNotFoundException {
+		return actividadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("not found"));
 	}
 
 	//Metodo Guardar
@@ -41,8 +44,10 @@ public class ActividadService {
 	}
 	
 	//Metodo Actualizar
-	public Actividad update(int id, ActividadDto dto) {
-		Actividad actividad = actividadRepository.findById(id).get();
+//	public Actividad update(int id, ActividadDto dto) {
+//	Actividad actividad = actividadRepository.findById(id).get();	
+   public Actividad update(int id, ActividadDto dto) throws ResourceNotFoundException {		
+		Actividad actividad = actividadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("not found"));
 		actividad.setNombre(dto.getNombre());
 		actividad.setApellido(dto.getApellido());
 		actividad.setPrecio(dto.getPrecio());
@@ -50,8 +55,10 @@ public class ActividadService {
 	}
 	
 	//Metodo Eliminar
-	public Actividad delete(int id) {
-		Actividad actividad = actividadRepository.findById(id).get();
+//	public Actividad delete(int id) {
+//	Actividad actividad = actividadRepository.findById(id).get();  
+		public Actividad delete(int id) throws ResourceNotFoundException {		
+		Actividad actividad = actividadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("not found"));
 		actividadRepository.delete(actividad);
 		return actividad;
 	}
