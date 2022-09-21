@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.angular.dto.ActividadDto;
 import com.app.angular.entity.Actividad;
+import com.app.angular.global.exceptions.AttributeException;
 import com.app.angular.global.exceptions.ResourceNotFoundException;
 import com.app.angular.service.ActividadService;
 
@@ -37,13 +38,13 @@ public class ActividadController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Actividad> save(@RequestBody ActividadDto dto){
+	public ResponseEntity<Actividad> save(@RequestBody ActividadDto dto) throws AttributeException{
 		return ResponseEntity.ok(actividadService.save(dto));
 	}
 	
 	@PutMapping("/{id}")
 //	public ResponseEntity<Actividad> update(@PathVariable("id") int id, @RequestBody ActividadDto dto){
-	public ResponseEntity<Actividad> update(@PathVariable("id") int id, @RequestBody ActividadDto dto) throws ResourceNotFoundException{		
+	public ResponseEntity<Actividad> update(@PathVariable("id") int id, @RequestBody ActividadDto dto) throws ResourceNotFoundException, AttributeException{		
 		return ResponseEntity.ok(actividadService.update(id, dto));
 	}
 	

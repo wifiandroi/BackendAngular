@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.angular.dto.ActividadDto;
 import com.app.angular.entity.Actividad;
+import com.app.angular.global.exceptions.AttributeException;
 import com.app.angular.global.exceptions.ResourceNotFoundException;
 import com.app.angular.repository.ActividadRepository;
 
@@ -30,9 +31,9 @@ public class ActividadService {
 	}
 
 	//Metodo Guardar
-	public Actividad save(ActividadDto dto) {
-//		if (actividadRepository.existsByName(dto.getNombre())) 
-//			throw new AttributeException("el nombre ya exite");
+	public Actividad save(ActividadDto dto) throws AttributeException {
+		if (actividadRepository.existsByNombre(dto.getNombre())) 
+			throw new AttributeException("el nombre ya exite");
 		 		
 		int id = autoIncrement();
 		Actividad actividad = new Actividad(id, dto.getNombre(), dto.getApellido(), dto.getPrecio());
@@ -49,11 +50,11 @@ public class ActividadService {
 	//Metodo Actualizar
 //	public Actividad update(int id, ActividadDto dto) {
 //	Actividad actividad = actividadRepository.findById(id).get();	
-   public Actividad update(int id, ActividadDto dto) throws ResourceNotFoundException {		
+   public Actividad update(int id, ActividadDto dto) throws ResourceNotFoundException, AttributeException {		
 		Actividad actividad = actividadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Sin actualizar"));
 		
-//		if(actividadRepository.existsByName(dto.getNombre()) && actividadRepository.findByName(dto.getNombre()).get().getId() != id)
-//			throw new AttributeException("el nombre ya exite");
+		if(actividadRepository.existsByNombre(dto.getNombre()) && actividadRepository.findByNombre(dto.getNombre()).get().getId() != id)
+			throw new AttributeException("el nombre ya exite");
 		
 		actividad.setNombre(dto.getNombre());
 		actividad.setApellido(dto.getApellido());
