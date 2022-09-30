@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.angular.dto.ActividadDto;
 import com.app.angular.entity.Actividad;
+import com.app.angular.global.Dto.MessageDto;
 import com.app.angular.global.exceptions.AttributeException;
 import com.app.angular.global.exceptions.ResourceNotFoundException;
 import com.app.angular.service.ActividadService;
@@ -40,19 +42,26 @@ public class ActividadController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Actividad> save(@Valid @RequestBody ActividadDto dto) throws AttributeException{
-		return ResponseEntity.ok(actividadService.save(dto));
+	public ResponseEntity<MessageDto> save(@Valid @RequestBody ActividadDto dto) throws AttributeException{
+		Actividad actividad = actividadService.save(dto);
+		String message = "actividad "+ actividad.getNombre() + " have been saved";
+		return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
 	}
 	
 	@PutMapping("/{id}")
 //	public ResponseEntity<Actividad> update(@PathVariable("id") int id, @RequestBody ActividadDto dto){
-	public ResponseEntity<Actividad> update(@PathVariable("id") int id, @Valid @RequestBody ActividadDto dto) throws ResourceNotFoundException, AttributeException{		
-		return ResponseEntity.ok(actividadService.update(id, dto));
+	public ResponseEntity<MessageDto> update(@PathVariable("id") int id, @Valid @RequestBody ActividadDto dto) throws ResourceNotFoundException, AttributeException{		
+		Actividad actividad = actividadService.update(id, dto);
+		String message = "actividad "+ actividad.getNombre() + " have been updated";
+		return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
 	}
 	
 	@DeleteMapping("/{id}")
 //	public ResponseEntity<Actividad> delete(@PathVariable("id") int id){
-	public ResponseEntity<Actividad> delete(@PathVariable("id") int id) throws ResourceNotFoundException{		
-		return ResponseEntity.ok(actividadService.delete(id));
+	public ResponseEntity<MessageDto> delete(@PathVariable("id") int id) throws ResourceNotFoundException{	
+		Actividad actividad = actividadService.delete(id);
+		String message = "actividad "+ actividad.getNombre() + " have been deleted";
+		return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
+		
 	}
 }
