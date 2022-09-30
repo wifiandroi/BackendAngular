@@ -1,12 +1,17 @@
 package com.app.angular.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 public class ActividadDto {
-
+	
+	@NotBlank(message = "Nombre Obligatorio")
 	private String nombre;
 
+	@NotBlank(message = "Apellido Obligatorio")
 	private String apellido;
 
+	@Min(value = 1, message = "Debe ingresar un cantidad")
 	private float precio;
 
 	public String getNombre() {

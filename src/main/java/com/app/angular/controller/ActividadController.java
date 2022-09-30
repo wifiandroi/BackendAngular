@@ -2,6 +2,8 @@ package com.app.angular.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,13 +40,13 @@ public class ActividadController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Actividad> save(@RequestBody ActividadDto dto) throws AttributeException{
+	public ResponseEntity<Actividad> save(@Valid @RequestBody ActividadDto dto) throws AttributeException{
 		return ResponseEntity.ok(actividadService.save(dto));
 	}
 	
 	@PutMapping("/{id}")
 //	public ResponseEntity<Actividad> update(@PathVariable("id") int id, @RequestBody ActividadDto dto){
-	public ResponseEntity<Actividad> update(@PathVariable("id") int id, @RequestBody ActividadDto dto) throws ResourceNotFoundException, AttributeException{		
+	public ResponseEntity<Actividad> update(@PathVariable("id") int id, @Valid @RequestBody ActividadDto dto) throws ResourceNotFoundException, AttributeException{		
 		return ResponseEntity.ok(actividadService.update(id, dto));
 	}
 	
